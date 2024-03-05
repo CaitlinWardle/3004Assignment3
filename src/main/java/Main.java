@@ -2,14 +2,15 @@ import java.sql.*;
 import java.sql.Date;
 
 public class Main {
+    //set up connection to sql database
     private static Connection connection;
     static String url="jdbc:postgresql://localhost:5432/Assignment3Database";
     static String user="postgres";
-    static String password="555Scout!";
+    static String password="xxxxxx"; //hidden
     private static Statement statement;
     public static void main(String[] args){
 
-
+        //if database doesnt exist then create it
         try {
             Class.forName("org.postgresql.Driver");
             connection= DriverManager.getConnection(url,user,password);
@@ -25,6 +26,7 @@ public class Main {
         catch(Exception ex){
             System.out.println("Error when attempting to connect to Postgre-Sql");
         }
+        
         deleteStudent(4);
         getAllStudents();
 
