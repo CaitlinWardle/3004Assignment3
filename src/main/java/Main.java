@@ -27,12 +27,28 @@ public class Main {
             System.out.println("Error when attempting to connect to Postgre-Sql");
         }
         
-        deleteStudent(4);
+        //show functionality
+        System.out.println("show the students originally");
         getAllStudents();
+
+        System.out.println("add new student");
+        LocalDate localDate=LocalDate.of(2024,04,01);
+        Date date=Date.valueOf(localDate);
+        addStudent("Caitlin","Wardle","ExampleEmail",date);
+        getAllStudents();
+
+        System.out.println("update a student");
+        updateStudentEmail(6,"newEmail");
+        getAllStudents();
+
+        System.out.println("delete a student");
+        deleteStudent(6);
+        getAllStudents();
+
 
     }
 
-
+    //function gets query results from database and prints it to screen
     public static void getAllStudents(){
         try{
             statement=connection.createStatement();
@@ -47,7 +63,7 @@ public class Main {
         }
 
     }
-
+     //function adds student to database
     public static void addStudent(String first_name, String last_name, String email, Date enrollment_date){
         String sql = "INSERT INTO students (first_name, last_name, email,enrollment_date) VALUES (?, ?, ?,?)";
 
@@ -62,7 +78,8 @@ public class Main {
             System.out.println("Error when attempting to add student");
         }
     }
-
+    
+    //function updates email of student in database if it matches given student_id
     public static void updateStudentEmail(Integer student_id, String new_email){
         String sql="UPDATE students SET email=? WHERE student_id=?";
         try (PreparedStatement updateStatement = connection.prepareStatement(sql)) {
@@ -74,7 +91,7 @@ public class Main {
             System.out.println("Error when attempting to update student email");
         }
     }
-
+    //function deletes student row in database if it matches the student_id
     public static void deleteStudent(Integer student_id){
         String sql="DELETE FROM students WHERE student_id = ?";
         try (PreparedStatement deleteStatement = connection.prepareStatement(sql)) {
