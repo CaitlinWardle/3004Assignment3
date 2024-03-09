@@ -14,3 +14,5 @@ Functions
     --updates students email in database
   public static void deleteStudent(Integer student_id)
     --deletes a student from database
+
+Video:   https://www.youtube.com/watch?v=zbjvXv1LjVU 
